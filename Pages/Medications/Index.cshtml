@@ -1,0 +1,71 @@
+@page
+@model Pharmacy_Inventory_System.Pages.Medications.IndexModel
+
+@{ ViewData["Title"] = "Medications"; }
+
+<h1>Medication Management</h1>
+
+<p>
+    <a asp-page="Create" class="btn btn-primary">
+        Add New Medication
+    </a>
+</p>
+
+@if (Model.Medications.Count == 0)
+{
+    <div class="alert alert-info">
+        No medications found. Add your first medication.
+    </div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped align-middle">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Stock Quantity</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var medication in Model.Medications)
+                {
+                    <tr>
+                        <td>@medication.Id</td>
+                        <td>
+                            <img src="@Url.Content("~/" + medication.Image)"
+                                 alt="@medication.Name"
+                                 style="width:70px;height:70px;object-fit:cover" />
+                        </td>
+                        <td>@medication.Name</td>
+                        <td>@medication.Description</td>
+                        <td>@medication.Price</td>
+                        <td>@medication.StockQuantity</td>
+                        <td>
+                            @(medication.Status == "A" ? "Active" : "Inactive")
+                        </td>
+                        <td>
+                            <a asp-page="Details"
+                               asp-route-id="@medication.Id"
+                               class="btn btn-sm btn-info">Details</a>
+
+                            <a asp-page="Edit"
+                               asp-route-id="@medication.Id"
+                               class="btn btn-sm btn-warning">Edit</a>
+
+                            <a asp-page="Delete"
+                               asp-route-id="@medication.Id"
+                               class="btn btn-sm btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

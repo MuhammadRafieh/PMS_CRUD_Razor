@@ -1,0 +1,29 @@
+@page "{id:int}"
+@model Pharmacy_Inventory_System.Pages.Medications.DetailsModel
+
+@{ ViewData["Title"] = "Medication Details"; }
+
+<h1>Medication Details</h1>
+
+<div class="card" style="max-width:600px">
+    <div class="card-body">
+        <h4>@Model.Medication.Name</h4>
+
+        <img src="@Url.Content("~/" + Model.Medication.Image)"
+             alt="@Model.Medication.Name"
+             style="width:200px;height:200px;object-fit:cover"
+             class="mb-3" />
+
+        <p><strong>ID:</strong> @Model.Medication.Id</p>
+        <p><strong>Description:</strong> @Model.Medication.Description</p>
+        <p><strong>Price:</strong> @Model.Medication.Price</p>
+        <p><strong>Stock Quantity:</strong> @Model.Medication.StockQuantity</p>
+        <p>
+            <strong>Status:</strong>
+            @(Model.Medication.Status == "A" ? "Active" : "Inactive")
+        </p>
+
+        <a asp-page="Edit" asp-route-id="@Model.Medication.Id" class="btn btn-warning">Edit</a>
+        <a asp-page="Index" class="btn btn-secondary">Back</a>
+    </div>
+</div>

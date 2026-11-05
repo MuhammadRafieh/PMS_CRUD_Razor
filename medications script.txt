@@ -1,0 +1,29 @@
+
+
+CREATE TABLE [dbo].[medications] (
+    [Id]           INT           NOT NULL IDENTITY,
+    [Name]         VARCHAR (50)  NOT NULL,
+    [Description]  VARCHAR (50)  NOT NULL,
+    [image]        VARCHAR (255) NOT NULL,
+    [Price]        INT           NOT NULL,
+    [StockQuantity] INT          NOT NULL,
+    [status]       VARCHAR (1)   NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+.................................
+
+Install-Package Microsoft.Data.SqlClient
+................
+Model
+Create the ADO.NET repository
+Register the repository in Program.cs
+Create the medication images folder  wwwroot/images/medications
+Data/MedicationImageService.cs
+................................
+//program.cs
+builder.Services.AddScoped<MedicationRepository>();
+builder.Services.AddScoped<MedicationImageService>();
+................
+"ConnectionStrings": {
+  "DefaultConnection": ""
+}

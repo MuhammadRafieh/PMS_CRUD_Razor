@@ -1,0 +1,67 @@
+@page "{id:int}"
+@model Pharmacy_Inventory_System.Pages.Medications.EditModel
+
+@{ ViewData["Title"] = "Edit Medication"; }
+
+<h1>Edit Medication</h1>
+
+<form method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="Medication.Id" />
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="Medication.Name" class="form-label">Medication Name</label>
+        <input asp-for="Medication.Name" class="form-control" />
+        <span asp-validation-for="Medication.Name" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Medication.Description" class="form-label">Description</label>
+        <input asp-for="Medication.Description" class="form-control" />
+        <span asp-validation-for="Medication.Description" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Current Image</label>
+        <div>
+            <img src="@Url.Content("~/" + Model.Medication.Image)"
+                 alt="@Model.Medication.Name"
+                 style="width:120px;height:120px;object-fit:cover" />
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ImageFile" class="form-label">Replace Image (optional)</label>
+        <input asp-for="ImageFile" type="file" accept=".jpg,.jpeg,.png,.webp" class="form-control" />
+        <span asp-validation-for="ImageFile" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Medication.Price" class="form-label">Price</label>
+        <input asp-for="Medication.Price" type="number" min="0" class="form-control" />
+        <span asp-validation-for="Medication.Price" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Medication.StockQuantity" class="form-label">Stock Quantity</label>
+        <input asp-for="Medication.StockQuantity" type="number" min="0" class="form-control" />
+        <span asp-validation-for="Medication.StockQuantity" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Medication.Status" class="form-label">Status</label>
+        <select asp-for="Medication.Status" class="form-select">
+            <option value="Available">Available</option>
+            <option value="Not-Available">Not Available</option>
+        </select>
+        <span asp-validation-for="Medication.Status" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update Medication</button>
+    <a asp-page="Index" class="btn btn-secondary">Cancel</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
